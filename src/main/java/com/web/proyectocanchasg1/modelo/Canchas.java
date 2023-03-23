@@ -13,21 +13,21 @@ public class Canchas {
     Long idCancha;
 
     String Nombre;
-    int HoraA;
-    int HoraC;
+    int Horas_abierta;
+    int Horas_cierre;
     String Fecha;
 
     public Canchas() {
         super();
         Nombre = null;
-        HoraA = 0;
-        HoraC = 0;
+        Horas_abierta = 0;
+        Horas_cierre = 0;
         Fecha = null;
     }
     public Canchas(String nombre, int horaA, int horaC, String fecha) {
         Nombre = nombre;
-        HoraA = horaA;
-        HoraC = horaC;
+        Horas_abierta = horaA;
+        Horas_cierre = horaC;
         Fecha = fecha;
     }
 
@@ -40,14 +40,21 @@ public class Canchas {
     }
 
     public int getHoraA() {
-        return HoraA;
+        return Horas_abierta;
     }
 
     public int getHoraC() {
-        return HoraC;
+        return Horas_cierre;
     }
 
     public String getFecha() {
         return Fecha;
+    }
+
+    public void setValuesInsert(String nom, int HoraA, int HoraC, String Fecha){
+        this.Nombre = nom;
+        this.Horas_abierta = HoraA;
+        this.Horas_cierre = HoraC;
+        this.Fecha = Fecha;
     }
 }

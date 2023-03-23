@@ -9,6 +9,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -18,9 +19,9 @@ public class CanchasControlador {
     CanchasRepository canchasRepository;
 
     @CrossOrigin
-    @GetMapping(value = "/insertar-cancha", produces = MediaType.APPLICATION_JSON_VALUE)
-    public  ResponseEntity<String> insertar() throws Exception{
-        Canchas cancha = new Canchas("Cancha1",10,21,"17/07/2022");
+    @GetMapping(value = "/Canchas", produces = MediaType.APPLICATION_JSON_VALUE)
+    public  ResponseEntity<String> insertarCancha(@RequestParam String Nombre, @RequestParam int HoraA, @RequestParam int HoraC, @RequestParam String Fecha) throws Exception{
+        Canchas cancha = new Canchas(Nombre,HoraA,HoraC,Fecha);
         canchasRepository.save(cancha);
 
 
