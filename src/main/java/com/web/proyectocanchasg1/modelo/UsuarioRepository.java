@@ -1,5 +1,4 @@
 package com.web.proyectocanchasg1.modelo;
 import org.springframework.data.repository.CrudRepository;
-
-public interface ReservasRepository extends CrudRepository<Reservas, Long> {
+public interface UsuarioRepository extends CrudRepository<Usuario,Long>{
 }

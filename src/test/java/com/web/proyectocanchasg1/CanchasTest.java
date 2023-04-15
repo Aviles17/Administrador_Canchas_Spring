@@ -1,6 +1,5 @@
 package com.web.proyectocanchasg1;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Iterator;

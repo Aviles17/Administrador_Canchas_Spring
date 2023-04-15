@@ -3,73 +3,72 @@ package com.web.proyectocanchasg1.modelo;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "reserva")
 public class Reservas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long idreserva;
-    String fecha;
-    int hora;
-    int estado;
-    String razones;
-    int aceptado;
+    private Long idreserva;
+    private String fecha;
+    private String horaI;
+    private String horaF;
+    @ManyToOne
+    @JoinColumn(name = "usuario_id_usuario")
+    private Usuario usuario;
 
-    int Equipo1;
 
-    int Equipo2;
-
-    @ManyToOne()
-    @JoinColumn(name= "idCanchas")
-    Canchas canchita;
-
-    public Reservas(){
+    public Reservas() {
         super();
         this.fecha = null;
-        this.hora = 0;
-        this.razones = null;
-        this.estado = 0;
-        this.Equipo1 = 0;
-        this.Equipo2 = 0;
-        this.aceptado = 0;
+        this.horaF = null;
+        this.horaI = null;
+        this.usuario = null;
     }
-    public Reservas(String fecha, int hora, int estado, String Razones, int aceptado,int e1, int e2){
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public Reservas(String fecha, String horaI, String horaF, Long idUsuario, Usuario u) {
         this.fecha = fecha;
-        this.hora = hora;
-        this.razones = Razones;
-        this.estado = estado;
-        this.Equipo1 = e1;
-        this.Equipo2 = e2;
-        this.aceptado = aceptado;
+        this.horaI = horaI;
+        this.horaF = horaF;
+        this.usuario = u;
     }
 
     public Long getIdreserva() {
         return idreserva;
     }
 
+    public void setIdreserva(Long idreserva) {
+        this.idreserva = idreserva;
+    }
+
     public String getFecha() {
         return fecha;
     }
 
-    public int getHora() {
-        return hora;
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
     }
 
-    public int getEstado() {
-        return estado;
+    public String getHoraI() {
+        return horaI;
     }
 
-    public String getRazones() {
-        return razones;
+    public void setHoraI(String horaI) {
+        this.horaI = horaI;
     }
 
-    public int getAceptado() {
-        return aceptado;
+    public String getHoraF() {
+        return horaF;
     }
 
-    public int getEquipo1() {
-        return Equipo1;
+    public void setHoraF(String horaF) {
+        this.horaF = horaF;
     }
 
-    public int getEquipo2() {
-        return Equipo2;
-    }
 }
