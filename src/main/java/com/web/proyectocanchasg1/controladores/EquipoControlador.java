@@ -26,7 +26,6 @@ public class EquipoControlador {
         HttpHeaders responseHeaders = new HttpHeaders();
         return  new ResponseEntity<String>( "{\"respuesta\":\"exito\"}", responseHeaders, HttpStatus.OK );
     }
-
     @CrossOrigin
     @GetMapping(value = "/Equipo", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> insertarMultiplesEquipos(@RequestParam ArrayList<Equipo> equipos) throws Exception{
