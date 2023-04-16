@@ -1,4 +1,5 @@
 package com.web.proyectocanchasg1.modelo;
+import com.amazonaws.util.json.JSONObject;
 import jakarta.persistence.*;
 
 @Entity
@@ -64,5 +65,14 @@ public class Grupo {
 
     public void setReserva(Reservas reserva) {
         this.reserva = reserva;
+    }
+
+    public JSONObject toJSON() throws Exception {
+        JSONObject jgrupo = new JSONObject();
+        jgrupo.put("id", getIdGrupo());
+        jgrupo.put("equipo_1", getEquipo());
+        jgrupo.put("equipo_2", getEquipo1());
+        jgrupo.put("reserva", getReserva());
+        return jgrupo;
     }
 }

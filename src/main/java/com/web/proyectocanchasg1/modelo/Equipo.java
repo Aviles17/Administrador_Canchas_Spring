@@ -16,8 +16,7 @@ public class Equipo {
 
     private String Nombre;
 
-    public Equipo(Long idEquipo, String nombre, int estado, String urlData) {
-        this.idEquipo = idEquipo;
+    public Equipo(String nombre) {
         Nombre = nombre;
     }
 

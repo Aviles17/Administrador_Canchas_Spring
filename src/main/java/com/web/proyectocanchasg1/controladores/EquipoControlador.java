@@ -50,7 +50,7 @@ public class EquipoControlador {
     }
 
     @CrossOrigin
-    @GetMapping(value = "/Equipo/{nombre_equipo}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/Equipo/nombre_equipo/{nombre_equipo}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getEquipobyName(@PathVariable String name) throws Exception{
         List<Equipo> e = equipoRepository.findByNameE(name);
         String resEquipo = e.toString();

@@ -33,7 +33,7 @@ public class UsuarioControlador {
         return  new ResponseEntity<String>(u.toJSON().toString(), responseHeaders, HttpStatus.OK );
     }
     @CrossOrigin
-    @GetMapping(value = "/Usuario/{name_usuario}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/Usuario/name_usuario/{name_usuario}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getUsuariobyName(@PathVariable String name) throws Exception{
         List<Usuario> u = usuarioRepository.findByName(name);
         HttpHeaders responseHeaders = new HttpHeaders();

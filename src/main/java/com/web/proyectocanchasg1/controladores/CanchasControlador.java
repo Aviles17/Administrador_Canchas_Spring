@@ -49,7 +49,7 @@ public class CanchasControlador {
         return  new ResponseEntity<String>( "{\"respuesta\":\"error\"}", responseHeaders, HttpStatus.EXPECTATION_FAILED);
     }
     @CrossOrigin
-    @GetMapping(value = "/Canchas/{nombre_canchas}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/Canchas/nombre_canchas/{nombre_canchas}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getFromNameCanchas(@PathVariable String nombre_canchas) throws Exception{
         List<Canchas> c = canchasRepository.findByName(nombre_canchas);
         String resCanchas = c.toString();
