@@ -1,5 +1,6 @@
 package com.web.proyectocanchasg1.modelo;
 
+import com.amazonaws.util.json.JSONObject;
 import jakarta.persistence.*;
 
 @Entity
@@ -69,6 +70,16 @@ public class Reservas {
 
     public void setHoraF(String horaF) {
         this.horaF = horaF;
+    }
+
+    public JSONObject toJSON() throws Exception {
+        JSONObject jreserva = new JSONObject();
+        jreserva.put("id", getIdreserva());
+        jreserva.put("fecha", getFecha());
+        jreserva.put("Hora_i", getHoraI());
+        jreserva.put("Hora_f", getHoraF());
+        jreserva.put("usuario", getUsuario());
+        return jreserva;
     }
 
 }

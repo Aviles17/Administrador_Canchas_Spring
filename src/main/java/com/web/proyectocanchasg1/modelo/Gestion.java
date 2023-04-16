@@ -1,4 +1,5 @@
 package com.web.proyectocanchasg1.modelo;
+import com.amazonaws.util.json.JSONObject;
 import jakarta.persistence.*;
 
 @Entity
@@ -29,10 +30,6 @@ public class Gestion {
         this.canchas = Cancha;
     }
 
-
-
-
-
     public Long getIdGestion() {
         return idGestion;
     }
@@ -55,5 +52,13 @@ public class Gestion {
 
     public void setCanchas(Canchas canchas) {
         this.canchas = canchas;
+    }
+
+    public JSONObject toJSON() throws Exception {
+        JSONObject jgestion = new JSONObject();
+        jgestion.put("id", getIdGestion());
+        jgestion.put("reserva", getReserva());
+        jgestion.put("canchas", getCanchas());
+        return jgestion;
     }
 }
