@@ -14,6 +14,7 @@ public class Equipo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEquipo;
 
+    @Column(name = "nombre_equipo")
     private String Nombre;
 
     public Equipo(String nombre) {

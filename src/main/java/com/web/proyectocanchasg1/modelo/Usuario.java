@@ -1,10 +1,8 @@
 package com.web.proyectocanchasg1.modelo;
 
 import com.amazonaws.util.json.JSONObject;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 @Entity
@@ -14,8 +12,10 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idUsuario;
 
+    @Column(name = "nombre_Usuario")
     private String NombreU;
 
+    @Column(name = "password")
     private String CodedPassword;
 
     public Usuario(String nombreU, String codedPassword) {
