@@ -2,6 +2,7 @@ package com.web.proyectocanchasg1.controladores;
 
 import com.web.proyectocanchasg1.modelo.Canchas;
 import com.web.proyectocanchasg1.modelo.CanchasRepository;
+import com.web.proyectocanchasg1.service.CanchasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,8 +16,7 @@ import java.util.List;
 @RestController
 public class CanchasControlador {
 
-    @Autowired
-    CanchasRepository canchasRepository;
+    CanchasService canchasRepository;
 
     @CrossOrigin
     @GetMapping(value = "/Canchas", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -34,20 +34,6 @@ public class CanchasControlador {
         return  new ResponseEntity<String>(cancha.toJSON().toString(), responseHeaders, HttpStatus.OK );
     }
 
-    @CrossOrigin
-    @GetMapping(value = "/Canchas", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> insertarMultiplesCanchas(@RequestParam ArrayList<Canchas> canchas) throws Exception{
-        ArrayList<String> numRes = new ArrayList<>();
-        for(Canchas c: canchas){
-            ResponseEntity<String> res = insertarCancha(c);
-            numRes.add(res.toString());
-        }
-        HttpHeaders responseHeaders = new HttpHeaders();
-        if(numRes.size() == canchas.size()){
-            return  new ResponseEntity<String>( "{\"respuesta\":\"exito\"}", responseHeaders, HttpStatus.OK);
-        }
-        return  new ResponseEntity<String>( "{\"respuesta\":\"error\"}", responseHeaders, HttpStatus.EXPECTATION_FAILED);
-    }
     @CrossOrigin
     @GetMapping(value = "/Canchas/nombre_canchas/{nombre_canchas}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getFromNameCanchas(@PathVariable String nombre_canchas) throws Exception{

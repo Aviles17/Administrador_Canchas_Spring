@@ -2,6 +2,7 @@ package com.web.proyectocanchasg1.controladores;
 
 import com.web.proyectocanchasg1.modelo.Gestion;
 import com.web.proyectocanchasg1.modelo.GestionRepository;
+import com.web.proyectocanchasg1.service.GestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -12,8 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class GestionControlador {
 
-    @Autowired
-    GestionRepository gestionRepository;
+    GestionService gestionRepository;
 
 
     @CrossOrigin

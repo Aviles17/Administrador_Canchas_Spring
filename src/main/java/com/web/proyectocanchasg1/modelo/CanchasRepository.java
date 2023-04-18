@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
+
 public interface CanchasRepository extends CrudRepository<Canchas, Long> {
-    List<Canchas> findByName(String name);
 }

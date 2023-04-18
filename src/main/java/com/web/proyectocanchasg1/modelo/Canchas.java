@@ -15,72 +15,65 @@ public class Canchas {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idCancha;
+    private Long idCanchas;
 
-    private String Nombre;
-    private int Horas_abierta;
-    private int Horas_cierre;
-    private String Fecha;
+    private String Nombre_canchas;
+    private int Hora_abierta;
+    private int Hora_cerrado;
+    private String Fecha_canchas;
 
     public Canchas() {
         super();
-        Nombre = null;
-        Horas_abierta = 0;
-        Horas_cierre = 0;
-        Fecha = null;
+        Nombre_canchas = null;
+        Hora_abierta = 0;
+        Hora_cerrado = 0;
+        Fecha_canchas = null;
     }
     public Canchas(String nombre, int horaA, int horaC, String fecha) {
-        Nombre = nombre;
-        Horas_abierta = horaA;
-        Horas_cierre = horaC;
-        Fecha = fecha;
+        Nombre_canchas = nombre;
+        Hora_abierta = horaA;
+        Hora_cerrado = horaC;
+        Fecha_canchas = fecha;
     }
 
     public Long getIdCancha() {
-        return idCancha;
+        return idCanchas;
     }
 
     public String getNombre() {
-        return Nombre;
+        return Nombre_canchas;
     }
 
     public int getHoraA() {
-        return Horas_abierta;
+        return Hora_abierta;
     }
 
     public int getHoraC() {
-        return Horas_cierre;
+        return Hora_cerrado;
     }
 
     public String getFecha() {
-        return Fecha;
+        return Fecha_canchas;
     }
 
     public void setIdCancha(Long idCancha) {
-        this.idCancha = idCancha;
+        this.idCanchas = idCancha;
     }
 
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        Nombre_canchas = nombre;
     }
 
     public void setHoras_abierta(int horas_abierta) {
-        Horas_abierta = horas_abierta;
+        Hora_abierta = horas_abierta;
     }
 
     public void setHoras_cierre(int horas_cierre) {
-        Horas_cierre = horas_cierre;
+        Hora_cerrado = horas_cierre;
     }
 
     public void setFecha(String fecha) {
-        Fecha = fecha;
-    }
-
-    public void setValuesInsert(String nom, int HoraA, int HoraC, String Fecha){
-        this.Nombre = nom;
-        this.Horas_abierta = HoraA;
-        this.Horas_cierre = HoraC;
-        this.Fecha = Fecha;
+        Fecha_canchas = fecha;
     }
 
     public JSONObject toJSON() throws Exception {
