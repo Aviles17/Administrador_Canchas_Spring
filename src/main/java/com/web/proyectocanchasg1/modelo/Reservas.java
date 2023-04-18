@@ -8,9 +8,12 @@ import jakarta.persistence.*;
 public class Reservas {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idreserva;
+    private Long id_reserva;
+    @Column(name = "fecha_reserva")
     private String fecha;
+    @Column(name = "hora_inicio")
     private String horaI;
+    @Column(name = "hora_final")
     private String horaF;
     @ManyToOne
     @JoinColumn(name = "usuario_id_usuario")
@@ -33,7 +36,7 @@ public class Reservas {
         this.usuario = usuario;
     }
 
-    public Reservas(String fecha, String horaI, String horaF, Long idUsuario, Usuario u) {
+    public Reservas(String fecha, String horaI, String horaF, Usuario u) {
         this.fecha = fecha;
         this.horaI = horaI;
         this.horaF = horaF;
@@ -41,11 +44,11 @@ public class Reservas {
     }
 
     public Long getIdreserva() {
-        return idreserva;
+        return id_reserva;
     }
 
     public void setIdreserva(Long idreserva) {
-        this.idreserva = idreserva;
+        this.id_reserva = idreserva;
     }
 
     public String getFecha() {

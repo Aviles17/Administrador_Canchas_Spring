@@ -1,6 +1,5 @@
 package com.web.proyectocanchasg1;
 
-import com.web.proyectocanchasg1.modelo.Equipo;
 import com.web.proyectocanchasg1.modelo.Usuario;
 import com.web.proyectocanchasg1.service.UsuarioService;
 import org.junit.jupiter.api.Test;
@@ -37,14 +36,14 @@ public class UsuarioTest {
             int nuevaCantidad = 0;
             while(users.hasNext() ) {
                 users.next();
-                cantidad ++;
+                nuevaCantidad ++;
             }
 
             List<Usuario> res = usuarioService.findByName("Cesar");
-
-            if(cantidad + 3 == nuevaCantidad && res.size() == 1){
+            if(cantidad + 2 == nuevaCantidad && res.size() == 1){
                 compInsercion = true;
             }
+            assertTrue(compInsercion, "Se incertaron correctamente los usuarios");
 
         }
         catch (Exception e) {
