@@ -1,7 +1,7 @@
 package com.web.proyectocanchasg1.controladores;
 
 import com.web.proyectocanchasg1.modelo.Usuario;
-import com.web.proyectocanchasg1.service.UsuarioService;
+import com.web.proyectocanchasg1.modelo.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,7 +16,7 @@ import java.util.List;
 public class UsuarioControlador {
 
     @Autowired
-    UsuarioService usuarioRepository;
+    UsuarioRepository usuarioRepository;
 
     @CrossOrigin
     @GetMapping(value = "/Usuario", produces = MediaType.APPLICATION_JSON_VALUE)

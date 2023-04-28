@@ -1,7 +1,7 @@
 package com.web.proyectocanchasg1;
 
 import com.web.proyectocanchasg1.modelo.Usuario;
-import com.web.proyectocanchasg1.service.UsuarioService;
+import com.web.proyectocanchasg1.modelo.UsuarioRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,13 +14,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest
 public class UsuarioTest {
     @Autowired
-    private UsuarioService usuarioService;
+    private UsuarioRepository usuarioRepository;
 
     @Test
     public void pruebaUsuario(){
         try{
             Boolean compInsercion = false;
-            Iterator<Usuario> users = usuarioService.findAll().iterator();
+            Iterator<Usuario> users = usuarioRepository.findAll().iterator();
             int cantidad = 0;
             while(users.hasNext() ) {
                 users.next();
@@ -28,18 +28,18 @@ public class UsuarioTest {
             }
 
             Usuario u1 = new Usuario("Aviles", "1234567");
-            usuarioService.save(u1);
+            usuarioRepository.save(u1);
             u1 = new Usuario("Cesar", "Mi_Clave");
-            usuarioService.save(u1);
+            usuarioRepository.save(u1);
 
-            users = usuarioService.findAll().iterator();
+            users = usuarioRepository.findAll().iterator();
             int nuevaCantidad = 0;
             while(users.hasNext() ) {
                 users.next();
                 nuevaCantidad ++;
             }
 
-            List<Usuario> res = usuarioService.findByName("Cesar");
+            List<Usuario> res =usuarioRepository.findByName("Cesar");
             if(cantidad + 2 == nuevaCantidad && res.size() == 1){
                 compInsercion = true;
             }

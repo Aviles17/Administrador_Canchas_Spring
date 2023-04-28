@@ -1,9 +1,9 @@
 package com.web.proyectocanchasg1;
 
 import com.web.proyectocanchasg1.modelo.Reservas;
+import com.web.proyectocanchasg1.modelo.ReservasRepository;
 import com.web.proyectocanchasg1.modelo.Usuario;
-import com.web.proyectocanchasg1.service.ReservasService;
-import com.web.proyectocanchasg1.service.UsuarioService;
+import com.web.proyectocanchasg1.modelo.UsuarioRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,15 +16,15 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest
 public class ReservaTest {
     @Autowired
-    private ReservasService reservasService;
+    private ReservasRepository reservasRepository;
     @Autowired
-    private UsuarioService usuarioService;
+    private UsuarioRepository usuarioRepository;
 
     @Test
     public void reservaTest(){
         try{
             Boolean compInsercion = false;
-            Iterator<Reservas> reservas = reservasService.findAll().iterator();
+            Iterator<Reservas> reservas = reservasRepository.findAll().iterator();
             int cantidad = 0;
             while(reservas.hasNext() ) {
                 reservas.next();
@@ -32,21 +32,21 @@ public class ReservaTest {
             }
 
             Usuario UsR = new Usuario("Reservas1", "Hola");
-            usuarioService.save(UsR);
+            usuarioRepository.save(UsR);
 
-            List<Usuario> Ureserva = usuarioService.findByName("Reservas1");
+            List<Usuario> Ureserva = usuarioRepository.findByName("Reservas1");
 
             Reservas r = new Reservas("01/02/2023","12:00","4:00",Ureserva.get(0));
 
-            reservasService.save(r);
+            reservasRepository.save(r);
 
-            reservas = reservasService.findAll().iterator();
+            reservas = reservasRepository.findAll().iterator();
             int cantidad_nueva = 0;
             while(reservas.hasNext() ) {
                 reservas.next();
                 cantidad_nueva ++;
             }
-            List<Reservas> res = reservasService.findbyUserName("Reservas1");
+            List<Reservas> res = reservasRepository.findbyUserName("Reservas1");
 
             if(cantidad + 1 == cantidad_nueva && res.size() == 1){
                 compInsercion = true;

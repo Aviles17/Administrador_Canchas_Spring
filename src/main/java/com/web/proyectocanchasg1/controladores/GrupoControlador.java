@@ -2,8 +2,6 @@ package com.web.proyectocanchasg1.controladores;
 
 import com.web.proyectocanchasg1.modelo.Grupo;
 import com.web.proyectocanchasg1.modelo.GrupoRepository;
-import com.web.proyectocanchasg1.modelo.Reservas;
-import com.web.proyectocanchasg1.service.GrupoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -14,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class GrupoControlador {
 
-    GrupoService grupoRepository;
+    @Autowired
+    GrupoRepository grupoRepository;
 
     @CrossOrigin
     @GetMapping(value = "/Grupo", produces = MediaType.APPLICATION_JSON_VALUE)

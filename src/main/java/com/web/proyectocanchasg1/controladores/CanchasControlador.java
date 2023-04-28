@@ -2,7 +2,6 @@ package com.web.proyectocanchasg1.controladores;
 
 import com.web.proyectocanchasg1.modelo.Canchas;
 import com.web.proyectocanchasg1.modelo.CanchasRepository;
-import com.web.proyectocanchasg1.service.CanchasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,7 +15,8 @@ import java.util.List;
 @RestController
 public class CanchasControlador {
 
-    CanchasService canchasRepository;
+    @Autowired
+    CanchasRepository canchasRepository;
 
     @CrossOrigin
     @GetMapping(value = "/Canchas", produces = MediaType.APPLICATION_JSON_VALUE)

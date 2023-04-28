@@ -2,7 +2,6 @@ package com.web.proyectocanchasg1.controladores;
 
 import com.web.proyectocanchasg1.modelo.Reservas;
 import com.web.proyectocanchasg1.modelo.ReservasRepository;
-import com.web.proyectocanchasg1.service.ReservasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -15,7 +14,8 @@ import java.util.List;
 @RestController
 public class ReservasControlador {
 
-    ReservasService reservasRepository;
+    @Autowired
+    ReservasRepository reservasRepository;
 
     @CrossOrigin
     @GetMapping(value = "/Reserva", produces = MediaType.APPLICATION_JSON_VALUE)
