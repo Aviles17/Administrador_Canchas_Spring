@@ -29,10 +29,10 @@ public class Canchas {
         Hora_cerrado = 0;
         Fecha_canchas = null;
     }
-    public Canchas(String nombre, int horaA, int horaC, String fecha) {
+    public Canchas(String nombre, int hora_a, int hora_c, String fecha) {
         Nombre_canchas = nombre;
-        Hora_abierta = horaA;
-        Hora_cerrado = horaC;
+        Hora_abierta = hora_a;
+        Hora_cerrado = hora_c;
         Fecha_canchas = fecha;
     }
 
@@ -63,17 +63,15 @@ public class Canchas {
     public void setNombre(String nombre) {
         Nombre_canchas = nombre;
     }
-
-    public void setHoras_abierta(int horas_abierta) {
-        Hora_abierta = horas_abierta;
-    }
-
-    public void setHoras_cierre(int horas_cierre) {
-        Hora_cerrado = horas_cierre;
-    }
-
     public void setFecha(String fecha) {
         Fecha_canchas = fecha;
+    }
+    public void setHora_abierta(int hora_a) {
+        Hora_abierta = hora_a;
+    }
+
+    public void setHora_cerrado(int hora_c) {
+        Hora_cerrado = hora_c;
     }
 
     public JSONObject toJSON() throws Exception {
@@ -96,4 +94,14 @@ public class Canchas {
         return jcancha;
     }
 
+    @Override
+    public String toString() {
+        return "Canchas{" +
+                "idCanchas=" + idCanchas +
+                ", Nombre_canchas='" + Nombre_canchas + '\'' +
+                ", Hora_abierta=" + Hora_abierta +
+                ", Hora_cerrado=" + Hora_cerrado +
+                ", Fecha_canchas='" + Fecha_canchas + '\'' +
+                '}';
+    }
 }

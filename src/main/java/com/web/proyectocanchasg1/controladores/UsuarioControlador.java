@@ -20,7 +20,9 @@ public class UsuarioControlador {
 
     @CrossOrigin
     @GetMapping(value = "/Usuario", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> insertarUsuario(@RequestParam Usuario u) throws Exception{
+    public ResponseEntity<String> insertarUsuario(@RequestParam String Usuario,
+                                                  @RequestParam String Clave) throws Exception{
+        Usuario u = new Usuario(Usuario,Clave);
         usuarioRepository.save(u);
         HttpHeaders responseHeaders = new HttpHeaders();
         return  new ResponseEntity<String>( "{\"respuesta\":\"exito\"}", responseHeaders, HttpStatus.OK );

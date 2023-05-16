@@ -1,9 +1,6 @@
 package com.web.proyectocanchasg1;
 
-import com.web.proyectocanchasg1.modelo.Reservas;
-import com.web.proyectocanchasg1.modelo.ReservasRepository;
-import com.web.proyectocanchasg1.modelo.Usuario;
-import com.web.proyectocanchasg1.modelo.UsuarioRepository;
+import com.web.proyectocanchasg1.modelo.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,6 +16,8 @@ public class ReservaTest {
     private ReservasRepository reservasRepository;
     @Autowired
     private UsuarioRepository usuarioRepository;
+    @Autowired
+    private CanchasRepository canchasRepository;
 
     @Test
     public void reservaTest(){
@@ -33,10 +32,13 @@ public class ReservaTest {
 
             Usuario UsR = new Usuario("Reservas1", "Hola");
             usuarioRepository.save(UsR);
+            Canchas Cr = new Canchas("ReservaC",7,23,"02/03/22");
+            canchasRepository.save(Cr);
 
             List<Usuario> Ureserva = usuarioRepository.findByName("Reservas1");
+            List<Canchas> CReserva = canchasRepository.findByName("ReservaC");
 
-            Reservas r = new Reservas("01/02/2023","12:00","4:00",Ureserva.get(0));
+            Reservas r = new Reservas("01/02/2023",12,4,Ureserva.get(0),CReserva.get(0));
 
             reservasRepository.save(r);
 

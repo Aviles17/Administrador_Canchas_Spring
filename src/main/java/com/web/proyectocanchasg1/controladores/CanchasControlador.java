@@ -19,8 +19,12 @@ public class CanchasControlador {
     CanchasRepository canchasRepository;
 
     @CrossOrigin
-    @GetMapping(value = "/Canchas", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> insertarCancha(@RequestParam Canchas cancha) throws Exception{
+    @PostMapping(value = "/Canchas", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> insertarCancha(@RequestParam String nombre,
+                                                 @RequestParam int hora_a,
+                                                 @RequestParam int hora_c,
+                                                 @RequestParam String fecha) throws Exception{
+        Canchas cancha = new Canchas(nombre, hora_a, hora_c, fecha);
         canchasRepository.save(cancha);
         HttpHeaders responseHeaders = new HttpHeaders();
         return  new ResponseEntity<String>( "{\"respuesta\":\"exito\"}", responseHeaders, HttpStatus.OK );
@@ -28,7 +32,7 @@ public class CanchasControlador {
 
     @CrossOrigin
     @GetMapping(value = "/Canchas/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public  ResponseEntity<String> getCanchas(  @PathVariable Long id  ) throws Exception{
+    public  ResponseEntity<String> getCanchas(@PathVariable Long id  ) throws Exception{
         Canchas cancha = canchasRepository.findById(id).get();
         HttpHeaders responseHeaders = new HttpHeaders();
         return  new ResponseEntity<String>(cancha.toJSON().toString(), responseHeaders, HttpStatus.OK );

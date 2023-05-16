@@ -77,4 +77,13 @@ public class Usuario {
         }
         return hashedPassword;
     }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "idUsuario=" + idUsuario +
+                ", NombreU='" + NombreU + '\'' +
+                ", CodedPassword='" + CodedPassword + '\'' +
+                '}';
+    }
 }

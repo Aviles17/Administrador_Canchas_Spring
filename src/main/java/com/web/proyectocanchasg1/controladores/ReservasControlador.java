@@ -1,7 +1,6 @@
 package com.web.proyectocanchasg1.controladores;
 
-import com.web.proyectocanchasg1.modelo.Reservas;
-import com.web.proyectocanchasg1.modelo.ReservasRepository;
+import com.web.proyectocanchasg1.modelo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,13 +15,36 @@ public class ReservasControlador {
 
     @Autowired
     ReservasRepository reservasRepository;
+    @Autowired
+    UsuarioRepository usuarioRepository;
+    @Autowired
+    CanchasRepository canchasRepository;
 
     @CrossOrigin
-    @GetMapping(value = "/Reserva", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> insertarReserva(@RequestParam Reservas reserva){
-        reservasRepository.save(reserva);
+    @PostMapping(value = "/Reserva", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> insertarReserva(@RequestParam String fecha,
+                                                  @RequestParam int horai,
+                                                  @RequestParam int horaf,
+                                                  @RequestParam String usuario,
+                                                  @RequestParam String cancha){
+
+        List<Canchas> c = canchasRepository.findByName(cancha);
+        List<Usuario> u = usuarioRepository.findByName(usuario);
         HttpHeaders responseHeaders = new HttpHeaders();
-        return  new ResponseEntity<String>( "{\"respuesta\":\"exito\"}", responseHeaders, HttpStatus.OK );
+        if(u.get(0) != null){
+            if(c.get(0) != null){
+                Reservas reserva = new Reservas(fecha,horai,horaf,u.get(0),c.get(0));
+                reservasRepository.save(reserva);
+                return  new ResponseEntity<String>( "{\"respuesta\":\"exito\"}", responseHeaders, HttpStatus.OK );
+            }
+            else{
+                return  new ResponseEntity<String>( "{\"respuesta\":\"fallo\":\"no existe cancha\"}", responseHeaders, HttpStatus.NO_CONTENT);
+
+            }
+        }
+        else{
+            return  new ResponseEntity<String>( "{\"respuesta\":\"fallo\":\"no existe usuario\"}", responseHeaders, HttpStatus.NO_CONTENT);
+        }
     }
 
     @CrossOrigin

@@ -19,8 +19,9 @@ public class EquipoControlador {
 
 
     @CrossOrigin
-    @GetMapping(value = "/Equipo", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String>  insertarEquipo(@RequestParam Equipo e) throws Exception{
+    @PostMapping(value = "/Equipo", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String>  insertarEquipo(@RequestParam String nombre) throws Exception{
+        Equipo e = new Equipo(nombre);
         equipoRepository.save(e);
         HttpHeaders responseHeaders = new HttpHeaders();
         return  new ResponseEntity<String>( "{\"respuesta\":\"exito\"}", responseHeaders, HttpStatus.OK );

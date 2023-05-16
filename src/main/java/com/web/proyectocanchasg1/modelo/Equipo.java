@@ -26,6 +26,7 @@ public class Equipo {
         this.Nombre = null;
     }
 
+
     public Long getIdEquipo() {
         return idEquipo;
     }

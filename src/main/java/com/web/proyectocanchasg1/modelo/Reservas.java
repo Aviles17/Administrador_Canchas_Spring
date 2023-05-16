@@ -12,35 +12,40 @@ public class Reservas {
     @Column(name = "fecha_reserva")
     private String fecha;
     @Column(name = "hora_inicio")
-    private String horaI;
+    private int horaI;
     @Column(name = "hora_final")
-    private String horaF;
+    private int horaF;
     @ManyToOne
     @JoinColumn(name = "usuario_id_usuario")
     private Usuario usuario;
+
+    @ManyToOne
+    @JoinColumn(name = "canchas_id_canchas")
+    private Canchas cancha;
 
 
     public Reservas() {
         super();
         this.fecha = null;
-        this.horaF = null;
-        this.horaI = null;
+        this.horaF = 0;
+        this.horaI = 0;
         this.usuario = null;
+        this.cancha = null;
     }
 
+    public Reservas(String fecha, int horaI, int horaF, Usuario u, Canchas c) {
+        this.fecha = fecha;
+        this.horaI = horaI;
+        this.horaF = horaF;
+        this.usuario = u;
+        this.cancha = c;
+    }
     public Usuario getUsuario() {
         return usuario;
     }
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
-    }
-
-    public Reservas(String fecha, String horaI, String horaF, Usuario u) {
-        this.fecha = fecha;
-        this.horaI = horaI;
-        this.horaF = horaF;
-        this.usuario = u;
     }
 
     public Long getIdreserva() {
@@ -59,19 +64,19 @@ public class Reservas {
         this.fecha = fecha;
     }
 
-    public String getHoraI() {
+    public int getHoraI() {
         return horaI;
     }
 
-    public void setHoraI(String horaI) {
+    public void setHoraI(int horaI) {
         this.horaI = horaI;
     }
 
-    public String getHoraF() {
+    public int getHoraF() {
         return horaF;
     }
 
-    public void setHoraF(String horaF) {
+    public void setHoraF(int horaF) {
         this.horaF = horaF;
     }
 
@@ -81,7 +86,7 @@ public class Reservas {
         jreserva.put("fecha", getFecha());
         jreserva.put("Hora_i", getHoraI());
         jreserva.put("Hora_f", getHoraF());
-        jreserva.put("usuario", getUsuario());
+        jreserva.put("usuario", getUsuario().toString());
         return jreserva;
     }
 
