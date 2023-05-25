@@ -75,4 +75,15 @@ public class Grupo {
         jgrupo.put("reserva", getReserva());
         return jgrupo;
     }
+
+    @Override
+    public String toString() {
+        return "Grupo{" +
+                "idGrupo=" + idGrupo +
+                ", equipo=" + equipo.getNombre() +
+                ", equipo1=" + equipo1.getNombre() +
+                ", reserva=" + reserva.getIdreserva() +
+                ", usuario_reserva=" + reserva.getUsuario() +
+                '}';
+    }
 }

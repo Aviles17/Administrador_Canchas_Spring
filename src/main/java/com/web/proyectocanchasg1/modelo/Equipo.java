@@ -51,4 +51,12 @@ public class Equipo {
         }
         return jequipo;
     }
+
+    @Override
+    public String toString() {
+        return "Equipo{" +
+                "idEquipo=" + idEquipo +
+                ", Nombre='" + Nombre + '\'' +
+                '}';
+    }
 }

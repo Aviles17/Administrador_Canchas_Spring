@@ -90,4 +90,15 @@ public class Reservas {
         return jreserva;
     }
 
+    @Override
+    public String toString() {
+        return "Reservas{" +
+                "id_reserva=" + id_reserva +
+                ", fecha='" + fecha + '\'' +
+                ", horaI=" + horaI +
+                ", horaF=" + horaF +
+                ", usuario=" + usuario.getNombreU() +
+                ", cancha=" + cancha.getNombre() +
+                '}';
+    }
 }
