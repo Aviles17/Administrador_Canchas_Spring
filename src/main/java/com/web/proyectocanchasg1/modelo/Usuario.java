@@ -1,10 +1,12 @@
 package com.web.proyectocanchasg1.modelo;
 
 import com.amazonaws.util.json.JSONObject;
+import com.web.proyectocanchasg1.security.keymanagment;
 import jakarta.persistence.*;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
 @Entity
 public class Usuario {
 
@@ -18,9 +20,13 @@ public class Usuario {
     @Column(name = "password")
     private String CodedPassword;
 
+    @Column(name = "token")
+    private String JWTtoken;
+
     public Usuario(String nombreU, String codedPassword) {
         NombreU = nombreU;
         CodedPassword = hashPassword(codedPassword);
+        JWTtoken = null;
     }
 
     public Usuario(){
@@ -53,6 +59,14 @@ public class Usuario {
         CodedPassword = codedPassword;
     }
 
+    public String getJWTtoken() {
+        return JWTtoken;
+    }
+
+    public void setJWTtoken(String JWTtoken) {
+        this.JWTtoken = JWTtoken;
+    }
+
     public JSONObject toJSON() throws Exception {
         JSONObject jusuario = new JSONObject();
         jusuario.put("id", getIdUsuario());
@@ -68,14 +82,25 @@ public class Usuario {
             md.update(Password.getBytes());
             byte[] bytes = md.digest();
             StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < bytes.length; i++) {
-                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            for (byte aByte : bytes) {
+                sb.append(Integer.toString((aByte & 0xff) + 0x100, 16).substring(1));
             }
             hashedPassword = sb.toString();
         } catch (NoSuchAlgorithmException e){
             e.printStackTrace();
         }
         return hashedPassword;
+    }
+
+    public boolean LogIn(String username, String Password){
+        String hashedPassword = hashPassword(Password);
+        return this.NombreU.equals(username) && hashedPassword.equals(this.CodedPassword);
+    }
+
+    public String getJWTToken(String username, String Password){
+        String token = keymanagment.createJWT(username,Password);
+        setJWTtoken(token);
+        return token;
     }
 
     @Override

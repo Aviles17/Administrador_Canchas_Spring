@@ -8,4 +8,6 @@ import java.util.List;
 public interface UsuarioRepository extends CrudRepository<Usuario,Long>{
     @Query("SELECT u FROM Usuario u WHERE u.NombreU = :nombre ")
     List<Usuario> findByName(@Param("nombre") String name);
+    @Query("SELECT u FROM Usuario u WHERE u.JWTtoken = :token ")
+    Usuario findBytoken(@Param("token") String token);
 }

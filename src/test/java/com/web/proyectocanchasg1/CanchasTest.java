@@ -1,6 +1,7 @@
 package com.web.proyectocanchasg1;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Iterator;
 
@@ -45,7 +46,7 @@ public class CanchasTest {
         }
         catch (Exception e){
             e.printStackTrace();
-            assertTrue( false, "Error en la aplicación" );
+            fail("Error en la aplicación");
         }
     }
 }

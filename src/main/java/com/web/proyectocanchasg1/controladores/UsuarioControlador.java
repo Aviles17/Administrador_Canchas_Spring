@@ -4,15 +4,16 @@ import com.web.proyectocanchasg1.modelo.Reservas;
 import com.web.proyectocanchasg1.modelo.ReservasRepository;
 import com.web.proyectocanchasg1.modelo.Usuario;
 import com.web.proyectocanchasg1.modelo.UsuarioRepository;
+import com.web.proyectocanchasg1.security.keymanagment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
@@ -35,7 +36,7 @@ public class UsuarioControlador {
 
     @CrossOrigin
     @GetMapping(value = "/Usuario/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> getUsuarionyId(@PathVariable Long id) throws Exception{
+    public ResponseEntity<String> getUsuariobyId(@PathVariable Long id) throws Exception{
         Usuario u = usuarioRepository.findById(id).get();
         HttpHeaders responseHeaders = new HttpHeaders();
         return  new ResponseEntity<String>(u.toJSON().toString(), responseHeaders, HttpStatus.OK );
@@ -78,8 +79,50 @@ public class UsuarioControlador {
         else{
             HttpHeaders responseHeaders = new HttpHeaders();
             return  new ResponseEntity<String>( "{\"respuesta\":\"fallo\":\"Existen reservas con el usuario\"}", responseHeaders, HttpStatus.INTERNAL_SERVER_ERROR );
-
         }
     }
 
+    @CrossOrigin
+    @PostMapping(value = "/Usuario/iniciarSesion", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> InicioSesion(@RequestParam String usuario,
+                                               @RequestParam  String Password) throws Exception{
+        System.out.print("Entro a la funcion");
+        List<Usuario> u = usuarioRepository.findByName(usuario);
+        if(!u.isEmpty()){
+            System.out.print("Encontro el usuario");
+            boolean comp = u.get(0).LogIn(usuario,Password);
+            if(comp){
+                System.out.print("Se autentico");
+                String token = u.get(0).getJWTToken(usuario,Password);
+                u.get(0).setJWTtoken(token);
+                usuarioRepository.save(u.get(0));
+                HttpHeaders responseHeaders = new HttpHeaders();
+                return  new ResponseEntity<String>("{\"respuesta\": " + token + "}", responseHeaders, HttpStatus.OK );
+            }
+            else{
+                HttpHeaders responseHeaders = new HttpHeaders();
+                return  new ResponseEntity<String>( "{\"respuesta\":\"fallo\":\"Error en la autenticacion\"}", responseHeaders, HttpStatus.NO_CONTENT);
+
+            }
+        }
+        else{
+            HttpHeaders responseHeaders = new HttpHeaders();
+            return  new ResponseEntity<String>( "{\"respuesta\":\"fallo\":\"Error en la autenticacion\"}", responseHeaders, HttpStatus.NO_CONTENT);
+        }
+    }
+
+    @CrossOrigin
+    @PostMapping(value = "/Usuario/cerrarSesion", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> CerrarSesion(@RequestParam String token) throws Exception{
+        String username = keymanagment.decodeJWT(token);
+        List<Usuario> u = usuarioRepository.findByName(username);
+        if(!u.isEmpty()){
+            u.get(0).setJWTtoken(null);
+            usuarioRepository.save(u.get(0));
+            HttpHeaders responseHeaders = new HttpHeaders();
+            return  new ResponseEntity<String>( "{\"respuesta\":\"exito\"}", responseHeaders, HttpStatus.OK );
+        }
+        HttpHeaders responseHeaders = new HttpHeaders();
+        return  new ResponseEntity<String>( "{\"respuesta\":\"fallo\":\"No hay usuarios con ese nombre o token\"}", responseHeaders, HttpStatus.NO_CONTENT);
+    }
 }
