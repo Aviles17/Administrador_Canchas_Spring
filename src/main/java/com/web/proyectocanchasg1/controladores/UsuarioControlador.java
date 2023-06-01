@@ -28,6 +28,7 @@ public class UsuarioControlador {
     @PostMapping(value = "/Usuario", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> insertarUsuario(@RequestParam String Usuario,
                                                   @RequestParam String Clave) throws Exception{
+        //Metodo solo usado por superusuarios o administradores
         Usuario u = new Usuario(Usuario,Clave);
         usuarioRepository.save(u);
         HttpHeaders responseHeaders = new HttpHeaders();
@@ -37,6 +38,7 @@ public class UsuarioControlador {
     @CrossOrigin
     @GetMapping(value = "/Usuario/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getUsuariobyId(@PathVariable Long id) throws Exception{
+        //Metodo solo usado por superusuarios o administradores
         Usuario u = usuarioRepository.findById(id).get();
         HttpHeaders responseHeaders = new HttpHeaders();
         return  new ResponseEntity<String>(u.toJSON().toString(), responseHeaders, HttpStatus.OK );
@@ -44,6 +46,7 @@ public class UsuarioControlador {
     @CrossOrigin
     @GetMapping(value = "/Usuario/name_usuario/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> getUsuariobyName(@PathVariable String name) throws Exception{
+        //Metodo solo usado por superusuarios o administradores
         List<Usuario> u = usuarioRepository.findByName(name);
         HttpHeaders responseHeaders = new HttpHeaders();
         return  new ResponseEntity<String>(u.toString(), responseHeaders, HttpStatus.OK );
@@ -52,6 +55,7 @@ public class UsuarioControlador {
     @CrossOrigin
     @DeleteMapping(value = "/Usuario/removeAll/{name}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> DeletebyName(@PathVariable String name) throws Exception{
+        //Metodo solo usado por superusuarios o administradores
         List<Reservas> reservasUsuario = reservasRepository.findbyUserName(name);
         if(reservasUsuario.size() == 0){
             List<Usuario> u =  usuarioRepository.findByName(name);
@@ -68,6 +72,7 @@ public class UsuarioControlador {
 
     @CrossOrigin
     @DeleteMapping(value = "/Usuario/removeID/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    //Metodo solo usado por superusuarios o administradores
     public ResponseEntity<String> DeletebyId(@PathVariable Long id) throws Exception{
         List<Reservas> reservasUsuario = reservasRepository.findbyUserId(id);
         if(reservasUsuario.size() == 0){
